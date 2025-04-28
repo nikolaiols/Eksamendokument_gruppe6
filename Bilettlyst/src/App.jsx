@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {Routes, Route} from 'react-router-dom'
 import './App.css'
 import Layout from './components/Layout'
@@ -9,6 +9,23 @@ import Dashboard from './components/Dashboard'
 
 function App() {
   
+  // dette er ikke ferdig produkt men ment for å teste å hente ut info, denne henter ut all info uten noen filtrering.
+ // Lager en "state" (en variabel som React husker og kan oppdatere) for spillene
+ const [Events, setEvent] = useState();
+
+ // En funksjon som henter data fra en API
+ const getEvent = async () => {
+   fetch("https://app.ticketmaster.com/discovery/v2/events?apikey=XiNPWWR7685AFoobg27DG2naIh92yDVH&locale=*") // Henter data fra API-et
+     .then((response) => response.json()) // Konverterer svaret til JSON-format
+     .then((data) => setEvent(data._embedded?.events)) // Setter spillene i state-variabelen
+     .catch((error) => console.error("Skjedde noe dritt ved fetch", error)); // Hvis noe går galt, vis en feilmelding
+ };
+
+ // useEffect kjører en gang når komponenten lastes inn
+  useEffect(() => {
+   getEvent(); // Kaller på getEvent-funksjonen for å hente spillene
+   console.log("Min state", Events); // Skriver ut spillene i konsollen
+ }, []); // Tom array [] betyr at dette bare skjer én gang når appen starter
 
   return (
     <>
