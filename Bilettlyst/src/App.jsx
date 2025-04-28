@@ -10,7 +10,7 @@ import Dashboard from './components/Dashboard'
 function App() {
   
   // dette er ikke ferdig produkt men ment for å teste å hente ut info, denne henter ut all info uten noen filtrering.
- // Lager en "state" (en variabel som React husker og kan oppdatere) for spillene
+ // Lager en "state" (en variabel som React husker og kan oppdatere) for spillene 
  const [Events, setEvent] = useState();
 
  // En funksjon som henter data fra en API
