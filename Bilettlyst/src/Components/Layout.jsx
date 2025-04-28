@@ -6,7 +6,7 @@ export default function Layout({children}){
     return(
         <>       
         <header>
-           <h1>LOGO</h1>
+           <h1><Link to="/">LOGO</Link></h1>
            <nav>
                <ul>
                    <li><button><Link to="/">Hjem</Link></button></li> {/*denne og de tre under må kanskje flyttes ut av header, finner ut når vi får demo */}
