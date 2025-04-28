@@ -19,7 +19,7 @@ function App() {
     bytt ut siste parameterene etter "&"-tegnet for å filtrere (denne gjøres dynamisk når vi skal filtrere på category osv...)*/
      .then((response) => response.json()) // Konverterer svaret til JSON-format
      .then((data) => setEvent(data._embedded?.events)) // Setter spillene i state-variabelen
-     .catch((error) => console.error("Skjedde noe dritt ved fetch", error)); // Hvis noe går galt, vis en feilmelding
+     .catch((error) => console.error("Skjedde noe feil ved fetch", error)); // Hvis noe går galt, vis en feilmelding
  };
 
  // useEffect kjører en gang når komponenten lastes inn
