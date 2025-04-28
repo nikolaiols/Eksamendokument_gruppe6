@@ -3,6 +3,9 @@ import {Routes, Route} from 'react-router-dom'
 import './App.css'
 import Layout from './components/Layout'
 import Home from './components/Home'
+import EventPage from './components/EventPage'
+import CategoryPage from './components/CategoryPage'
+import Dashboard from './components/Dashboard'
 
 function App() {
   
@@ -12,9 +15,9 @@ function App() {
     <Layout>
     <Routes>
         <Route path="/" element={<Home />}></Route>
-        <Route path="/2" element={<Home />}></Route>
-        <Route path= "/3" element={<Home />}></Route>
-        <Route path="/4" element={<Home />}></Route>
+        <Route path="/event/:id" element={<EventPage />}></Route>
+        <Route path= "/category/:slug" element={<CategoryPage />}></Route>
+        <Route path="/dashboard" element={<Dashboard />}></Route>
     </Routes>
     </Layout>
     </>
