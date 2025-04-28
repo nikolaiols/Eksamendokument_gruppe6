@@ -15,7 +15,8 @@ function App() {
 
  // En funksjon som henter data fra en API
  const getEvent = async () => {
-   fetch("https://app.ticketmaster.com/discovery/v2/events?apikey=XiNPWWR7685AFoobg27DG2naIh92yDVH&locale=*") // Henter data fra API-et
+   fetch("https://app.ticketmaster.com/discovery/v2/events?apikey=XiNPWWR7685AFoobg27DG2naIh92yDVH&locale=*") /* Henter data fra API-et.
+    bytt ut siste parameterene etter "&"-tegnet for å filtrere (denne gjøres dynamisk når vi skal filtrere på category osv...)*/
      .then((response) => response.json()) // Konverterer svaret til JSON-format
      .then((data) => setEvent(data._embedded?.events)) // Setter spillene i state-variabelen
      .catch((error) => console.error("Skjedde noe dritt ved fetch", error)); // Hvis noe går galt, vis en feilmelding
