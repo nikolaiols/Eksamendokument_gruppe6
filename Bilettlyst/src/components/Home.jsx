@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 export default function Home(){
-  
+  // Lager en "state" (en variabel som React husker og kan oppdatere) for events
  const [Findings, setFindings] = useState([]);
  const [Tons, setTons] = useState([]);
  const [Skei, setSkei] = useState([]);
@@ -10,10 +10,10 @@ export default function Home(){
 
 //findings
  const getFindings = async () => {
-   fetch("https://app.ticketmaster.com/discovery/v2/events?apikey=XiNPWWR7685AFoobg27DG2naIh92yDVH&keyword=findings&locale=*&countryCode=NO") 
-     .then((response) => response.json()) 
-     .then((data) => setFindings(data._embedded?.events))
-     .catch((error) => console.error("Skjedde noe feil ved fetch", error)); 
+   fetch("https://app.ticketmaster.com/discovery/v2/events?apikey=XiNPWWR7685AFoobg27DG2naIh92yDVH&keyword=findings&locale=*&countryCode=NO") // Henter data fra API-et.
+     .then((response) => response.json()) //gjør om til JSON-format
+     .then((data) => setFindings(data._embedded?.events)) // Setter Findings i state-variabelen
+     .catch((error) => console.error("Skjedde noe feil ved fetch", error)); //feilmeldinger
  };
 
  //Tons of rock
@@ -49,14 +49,15 @@ export default function Home(){
    console.log("Tons of Rock:", Tons); 
    console.log("skeikampenfestivalen:", Skei);
    console.log("NEON:", Ne);
- }, []); 
+ }, []);
 
     
     return(
         <>
         {Findings.map((fin) => (
-            <h3>{fin.name}</h3>
+           <h3>{fin.name}</h3>
         ))}
+        
 
         {Tons.map((ton) => (
             <h3>{ton.name}</h3>
