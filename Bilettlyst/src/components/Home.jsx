@@ -56,7 +56,7 @@ export default function Home(){
     return(
         <>
         <h1>Sommerens festivaler!</h1>
-        
+        <section>
         {Findings.map((fin) => (
           <article key={fin.id}>
             <img src={fin.images?.[0]?.url} alt={fin.name} />
@@ -89,6 +89,7 @@ export default function Home(){
             <button>Les mer om {ne.name}</button>
           </article>
         ))}
+        </section>
         </>
     )
 
