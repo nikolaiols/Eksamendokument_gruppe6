@@ -1,14 +1,44 @@
-div{
-    nav{
+
+    header {
+        nav {
         display: flex;
-        flex-direction: row;
-        ul{
+        justify-content: center;
+        max-width: 1200px;
+    
+        ul {
             display: flex;
-            flex-direction: row;
-            li{
-                display: flex;
-                flex-direction: row;
+            flex: 1;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            max-width: 1200px;
+    
+            li {
+            display: flex;
+    
+            &.Logo {
+                margin-right: auto;
+            }
+    
+            &.Login {
+                margin-left: auto;
+            }
+    
+            button {
+                background: none;
+                border: none;
+                cursor: pointer;
+    
+                a {
+                text-decoration: none;
+                color: inherit;
+                }
+            }
             }
         }
+        }
     }
-}
