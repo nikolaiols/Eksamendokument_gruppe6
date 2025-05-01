@@ -34,7 +34,7 @@ export default function Home(){
 
   //NEON
   const getNeon = async () => {
-    fetch("https://app.ticketmaster.com/discovery/v2/events?apikey=XiNPWWR7685AFoobg27DG2naIh92yDVH&keyword=NEON&locale=*&size=1&countryCode=NO")
+    fetch("https://app.ticketmaster.com/discovery/v2/events?apikey=XiNPWWR7685AFoobg27DG2naIh92yDVH&keyword=neon&locale=*&size=1&countryCode=NO")
       .then((response) => response.json()) 
       .then((data) => setNeon(data._embedded?.events)) 
       .catch((error) => console.error("Skjedde noe feil ved fetch", error)); 
@@ -54,28 +54,38 @@ export default function Home(){
     
     return(
         <>
+        <h1>Sommerens festivaler!</h1>
+        
         {Findings.map((fin) => (
-          <article>
+          <article key={fin.id}>
+            <img src={fin.images?.[0]?.url} alt={fin.name} />
            <h3>{fin.name}</h3>
+           <button>Les mer om {fin.name}</button>
            </article>
         ))}
         
 
         {Tons.map((ton) => (
-          <article>
+          <article key={ton.id}>
+            <img src={ton.images?.[0]?.url} alt={ton.name} />
             <h3>{ton.name}</h3>
+            <button>Les mer om {ton.name}</button>
             </article>
         ))}
 
         {Skei.map((skei) => (
-          <article>
+          <article key={skei.id}>
+            <img src={skei.images?.[0]?.url} alt={skei.name} />
             <h3>{skei.name}</h3>
+            <button>Les mer om {skei.name}</button>
           </article>
         ))}
 
         {Ne.map((ne) => (
-          <article>
+          <article key={ne.id}>
+            <img src={ne.images?.[0]?.url} alt={ne.name} />
             <h3>{ne.name}</h3>
+            <button>Les mer om {ne.name}</button>
           </article>
         ))}
         </>
