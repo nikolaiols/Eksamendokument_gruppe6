@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import "../Styles/Home.scss"
 
 export default function Home(){
   // Lager en "state" (en variabel som React husker og kan oppdatere) for events
