@@ -13,6 +13,8 @@ export default function Layout({children}){
                    <li><button><Link to="/category/:slug">Sport</Link></button></li>
                    <li><button><Link to="/category/:slug">Teater/Show</Link></button></li>
                    <li className="Login"><button><Link to="/dashboard">Logg inn</Link></button></li> {/*karakter E: logg inn som fører brukeren til Dashboard. */}
+                   <li><button><Link to="/category/:slug">Teater</Link></button></li>
+                   <li><button><Link to="/dashboard">Logg inn</Link></button></li> {/*karakter E: logg inn som fører brukeren til Dashboard. */}
                </ul>
            </nav>
        </header>
@@ -25,3 +27,4 @@ export default function Layout({children}){
        </>
     )
 }
+

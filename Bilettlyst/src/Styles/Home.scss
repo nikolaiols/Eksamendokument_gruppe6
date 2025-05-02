@@ -42,3 +42,30 @@
         }
         }
     }
+
+section{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+article{
+    display: flex;
+    flex-direction: column;
+    max-width: 25%;
+    padding: 1rem;
+    border: 2px solid #fff;
+    display: flex;
+    align-items: center;
+    img{
+        max-width: 100%;
+        width: 100%;
+    }
+   
+    button {
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 8px; 
+      }
+}
