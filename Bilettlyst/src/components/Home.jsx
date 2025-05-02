@@ -7,6 +7,7 @@ export default function Home(){
  const [Tons, setTons] = useState([]);
  const [Skei, setSkei] = useState([]);
  const [Ne, setNeon] = useState([]);
+ const [City, setCity] = useState([]);
 
 
 //findings
@@ -40,16 +41,27 @@ export default function Home(){
       .then((data) => setNeon(data._embedded?.events)) 
       .catch((error) => console.error("Skjedde noe feil ved fetch", error)); 
   };
+
+    //city
+    const getCity = async () => {
+      fetch("https://app.ticketmaster.com/discovery/v2/events?apikey=XiNPWWR7685AFoobg27DG2naIh92yDVH&locale=*&size=10&city=oslo")
+        .then((response) => response.json()) 
+        .then((data) => setCity(data._embedded?.events)) 
+        .catch((error) => console.error("Skjedde noe feil ved fetch", error)); 
+    };
+
  
   useEffect(() => {
    getFindings()
    getTons()
    getSkei()
    getNeon()
+   getCity()
    console.log("Findings:", Findings);
    console.log("Tons of Rock:", Tons); 
    console.log("skeikampenfestivalen:", Skei);
    console.log("NEON:", Ne);
+   console.log("city:", City);
  }, []);
 
     
@@ -89,6 +101,16 @@ export default function Home(){
             <button>Les mer om {ne.name}</button>
           </article>
         ))}
+        </section>
+
+        <section>
+         <nav>
+          <button onClick={"oslo"}>Oslo</button>
+          <button>Stockhold</button>
+          <button>Berlin</button>
+          <button>London</button>
+          <button>Paris</button>
+         </nav>
         </section>
         </>
     )
