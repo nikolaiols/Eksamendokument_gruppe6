@@ -2,6 +2,13 @@ import { useEffect, useState } from "react";
 import "../Styles/Home.scss"
 
 export default function Home(){
+  //en funksjon som gjør det mulig å ta imot en tekslig verdi fra knappene og gjør den om til små bokstaver: (dette gjorde vi sammen på skolen, noen problemer med github så ble på min(Nikolai) sin pc)
+  const handleClick = (e) => {
+    const text = e.target.innerText.toLowerCase();
+    console.log(text)
+    getCity(text);
+  };
+  
   // Lager en "state" (en variabel som React husker og kan oppdatere) for events
  const [Findings, setFindings] = useState([]);
  const [Tons, setTons] = useState([]);
@@ -43,8 +50,8 @@ export default function Home(){
   };
 
     //city
-    const getCity = async () => {
-      fetch("https://app.ticketmaster.com/discovery/v2/events?apikey=XiNPWWR7685AFoobg27DG2naIh92yDVH&locale=*&size=10&city=oslo")
+    const getCity = async (text) => {
+      fetch(`https://app.ticketmaster.com/discovery/v2/events?apikey=XiNPWWR7685AFoobg27DG2naIh92yDVH&locale=*&size=10&city=${text}`)
         .then((response) => response.json()) 
         .then((data) => setCity(data._embedded?.events)) 
         .catch((error) => console.error("Skjedde noe feil ved fetch", error)); 
@@ -56,7 +63,7 @@ export default function Home(){
    getTons()
    getSkei()
    getNeon()
-   getCity()
+   //getCity()
    console.log("Findings:", Findings);
    console.log("Tons of Rock:", Tons); 
    console.log("skeikampenfestivalen:", Skei);
@@ -105,12 +112,21 @@ export default function Home(){
 
         <section>
          <nav>
-          <button onClick={"oslo"}>Oslo</button>
-          <button>Stockhold</button>
-          <button>Berlin</button>
-          <button>London</button>
-          <button>Paris</button>
+          <button onClick={handleClick}>Oslo</button>
+          <button onClick={handleClick}>Stockholm</button>
+          <button onClick={handleClick}>Berlin</button>
+          <button onClick={handleClick}>London</button>
+          <button onClick={handleClick}>Paris</button>
          </nav>
+          
+         {City.map((city) => (
+          <article key={city.id}>
+            <img src={city.images?.[0]?.url} alt={city.name} />
+            <h3>{city.name}</h3>
+            <button>Les mer om {city.name}</button>
+          </article>
+        ))}
+
         </section>
         </>
     )
