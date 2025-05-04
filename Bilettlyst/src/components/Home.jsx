@@ -110,7 +110,7 @@ export default function Home(){
         ))}
         </section>
 
-        <section>
+        <section className="Byer">
          <nav>
           <button onClick={handleClick}>Oslo</button>
           <button onClick={handleClick}>Stockholm</button>
