@@ -9,6 +9,7 @@ export default function CategoryPage() {
   const [events, setEvents] = useState([]);
 // Henter ut API-nøkkel fra ticketmaster
   const API_KEY = "XiNPWWR7685AFoobg27DG2naIh92yDVH";
+  
 // Finner ut hvilke "segmentID" som skal vrues basert på sluggs
   const segmentMap = {
     musikk: "KZFzniwnSyZfZ7v7nJ",
