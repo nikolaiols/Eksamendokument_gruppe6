@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "../Styles/Home.scss"
+import { Link } from "react-router-dom";
 
 export default function Home(){
   //en funksjon som gjør det mulig å ta imot en tekslig verdi fra knappene og gjør den om til små bokstaver: (dette gjorde vi sammen på skolen, noen problemer med github så ble på min(Nikolai) sin pc)
@@ -48,7 +49,7 @@ export default function Home(){
           <article key={fe.id}>
             {<img src={fe.images?.[0]?.url} alt={fe.name} />}
            <h3>{fe.name}</h3>
-           <button>Les mer om {fe.name}</button>
+           <Link to="/eventcard">Les mer om {fe.name}</Link>
            </article>
         ))} 
         </section>

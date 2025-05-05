@@ -2,10 +2,11 @@ import { useEffect, useState } from 'react'
 import {Routes, Route} from 'react-router-dom'
 import './App.css'
 import Layout from './components/Layout.jsx'
-import Home from './Components/Home'
+import Home from './components/Home'
 import EventPage from './components/EventPage'
 import CategoryPage from './components/CategoryPage'
 import Dashboard from './components/Dashboard'
+import EventCard from './components/EventCard.jsx'
 
 function App() {
   
@@ -17,6 +18,7 @@ function App() {
         <Route path="/event/:id" element={<EventPage />}></Route>
         <Route path= "/category/:slug" element={<CategoryPage />}></Route>
         <Route path="/dashboard" element={<Dashboard />}></Route>
+        <Route path="/eventcard" element={<EventCard />}></Route>
     </Routes>
     </Layout>
     </>
