@@ -10,7 +10,7 @@ export default function Home(){
     getCity(text);
   };
 
-  //lager en slug
+  //lager en slug 
   const CreateSlug = (name) => name.toLowerCase().replace(/\s+/g, "-");
   
   // Lager en "state" (en variabel som React husker og kan oppdatere) for events
@@ -50,6 +50,7 @@ export default function Home(){
         <section>
        
         {Festival.map((fe) => {
+          {/*mapper ut en slug for hver av festivalene*/}
           CreateSlug
           return (
             <article key={fe.id}>
