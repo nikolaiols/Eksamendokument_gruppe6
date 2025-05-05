@@ -25,6 +25,9 @@ export default function Home(){
      .catch((error) => console.error("Skjedde noe feil ved fetch", error)); //feilmeldinger
  };
 
+ // https://app.ticketmaster.com/discovery/v2/attractions?apikey=XiNPWWR7685AFoobg27DG2naIh92yDVH&id=K8vZ917oWOV,%20K8vZ917K7fV,%20K8vZ917_YJf,%20K8vZ917bJC7&locale=*
+
+ 
  //Tons of rock
  const getTons = async () => {
     fetch("https://app.ticketmaster.com/discovery/v2/events?apikey=XiNPWWR7685AFoobg27DG2naIh92yDVH&keyword=tons%20of%20rock&locale=*&size=1&countryCode=NO")
