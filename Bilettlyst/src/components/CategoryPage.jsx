@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import "../Styles/CategoryPage.scss";
 
 // Hoved komponentet for kategori siden
 export default function CategoryPage() {
@@ -55,7 +56,7 @@ export default function CategoryPage() {
 
   return ( // Skriver ut innhold på nettsiden. å returnere JSX som viser innhold.
     <>
-      <section>
+      <section className="Attraksjoner">
         <h2>Attraksjoner</h2>
         {attractions.map(attr => (
           <article key={attr.id}>
@@ -65,7 +66,7 @@ export default function CategoryPage() {
         ))}
       </section>
 
-      <section>
+      <section className="Arrangementer">
         <h2>Arrangementer</h2>
         {events.map((event) => {
           return (
@@ -90,7 +91,7 @@ export default function CategoryPage() {
         })}
       </section>
 
-      <section>
+      <section className="Spillesteder">
         <h2>Spillesteder</h2>
         {venues.map(venue => (
           <article key={venue.id}>

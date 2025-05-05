@@ -1,0 +1,52 @@
+
+section{
+    max-width: 1200px;
+    h2{
+        width: 100%;
+        padding: 50px;
+
+    }
+}
+.Attraksjoner{
+    display: flex;
+    article{
+        width: 400px;
+        height: 275px;
+        img{
+            max-width: 300px;
+            min-height: 200px;
+        }
+    }
+}
+.Arrangementer{
+    display: flex;
+    h2{
+        width: 100%;
+    }
+    article{
+
+        max-height: 400px;
+
+
+        p{
+           margin: 0;
+           text-align: left;
+        }
+    }
+}
+.Spillesteder{
+    display: flex;
+    h2{
+        width: 100%;
+    }
+    article{
+
+        max-height: 400px;
+
+
+        p{
+           margin: 0;
+           text-align: left;
+        }
+    }
+}
