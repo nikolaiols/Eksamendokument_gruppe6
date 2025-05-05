@@ -9,6 +9,9 @@ export default function Home(){
     console.log(text)
     getCity(text);
   };
+
+  //lager en slug
+  const CreateSlug = (name) => name.toLowerCase().replace(/\s+/g, "-");
   
   // Lager en "state" (en variabel som React husker og kan oppdatere) for events
  const [Festival, setFestival] = useState([]);
@@ -45,13 +48,17 @@ export default function Home(){
         <>
         <h1>Sommerens festivaler!</h1>
         <section>
-        {Festival.map((fe) => (
-          <article key={fe.id}>
-            {<img src={fe.images?.[0]?.url} alt={fe.name} />}
-           <h3>{fe.name}</h3>
-           <Link to="/eventcard">Les mer om {fe.name}</Link>
-           </article>
-        ))} 
+       
+        {Festival.map((fe) => {
+          CreateSlug
+          return (
+            <article key={fe.id}>
+              <img src={fe.images?.[0]?.url} alt={fe.name} />
+              <h3>{fe.name}</h3>
+              <Link to={`/event/:${CreateSlug(fe.name)}`}>Les mer om {fe.name}</Link>
+            </article>
+          );
+        })}
         </section>
 
         <section className="Byer">
