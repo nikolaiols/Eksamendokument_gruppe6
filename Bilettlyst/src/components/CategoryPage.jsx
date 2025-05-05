@@ -26,7 +26,7 @@ export default function CategoryPage() {
 
     fetch(
         // Henter ut informasjonen vi trenger, ${API_KEY} peker på API-nøkkelen vår, ${segmentId} basert på "musikk" eller annet.
-      `https://app.ticketmaster.com/discovery/v2/events?apikey=${API_KEY}&locale=*&size=20&countryCode=NO&segmentId=${segmentId}`
+      `https://app.ticketmaster.com/discovery/v2/events?apikey=${API_KEY}&locale=*&size=5&countryCode=US&segmentId=${segmentId}`
     )
       .then((response) => {
         return response.json();
@@ -51,8 +51,11 @@ export default function CategoryPage() {
 
   return ( // Skriver ut innhold på nettsiden. å returnere JSX som viser innhold.
     <>
-      <h1>{slug.toLowerCase()} – arrangementer</h1>
-      <section>
+    <section><h2>Attraksjoner</h2></section>
+  
+
+    <section>
+      <h2>{slug.toLowerCase()} – Arrangementer</h2>
         {events.map((event) => {
           return (
             <article key={event.id}>
@@ -71,6 +74,7 @@ export default function CategoryPage() {
           );
         })}
       </section>
+      <section><h2>Spillesteder</h2></section>
     </>
   );
 }
