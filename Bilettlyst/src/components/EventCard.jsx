@@ -18,6 +18,7 @@ export default function (){
       }, []);
 
     return(
+      <>
       <section>
      {Eventcard.map((ev) => (
         <article key={ev.id}>
@@ -30,6 +31,17 @@ export default function (){
          </article>
       ))}
       </section>
+      
+      <section>
+      {/*denne skal endres.*/}
+      {Eventcard.map((ev) => (
+        <article key={ev.id}>
+          <h3>{ev._embedded?.attractions?.[1]?.name}</h3>
+          {<img src={ev._embedded.attractions[1].images[1].url} alt="f" />}
+         </article>
+      ))}
+      </section>
+      </>
 
       //artister som er på festivalen bare bilde og navn
     )
