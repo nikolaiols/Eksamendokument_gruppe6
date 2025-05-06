@@ -35,6 +35,8 @@ export default function CategoryPage() {
       .then(data => {
         const eventData = data._embedded?.events || [];
         setEvents(eventData);
+
+        
       });
 
     // Henter attraksjoner
@@ -73,18 +75,10 @@ export default function CategoryPage() {
             <article key={event.id}>
               <img src={event.images?.[0]?.url} alt={event.name}/>
               <h3>{event.name}</h3>
-              <p>
-                {event.dates?.start?.localDate}
-              </p>
-              <p>
-              {event.dates?.start?.localTime}
-              </p>
-              <p>
-                {event._embedded?.venues?.[0]?.city?.name}
-              </p>
-              <p>
-              {event._embedded?.venues?.[0]?.country?.name}
-              </p>
+              <p>{event.dates?.start?.localDate}</p>
+              <p>{event.dates?.start?.localTime}</p>
+              <p>{event._embedded?.venues?.[0]?.city?.name} </p>
+              <p>{event._embedded?.venues?.[0]?.country?.name}</p>
               <p>{event._embedded?.venues?.[0]?.name}</p>
             </article>
           );
@@ -95,9 +89,9 @@ export default function CategoryPage() {
         <h2>Spillesteder</h2>
         {venues.map(venue => (
           <article key={venue.id}>
+             <img src={venue.images?.[0]?.url} alt={venue.name}/>
             <h3>{venue.name}</h3>
             <p>{venue.city?.name}, {venue.country?.name}</p>
-            <img src={venue.images?.[0]?.url} alt={venue.name}/>
           </article>
         ))}
       </section>
