@@ -10,6 +10,7 @@ export default function CategoryPage() {
   const [events, setEvents] = useState([]);
   const [attractions, setAttractions] = useState([]);
   const [venues, setVenues] = useState([]);
+  
   // Henter ut API-nøkkel fra ticketmaster
   const API_KEY = "XiNPWWR7685AFoobg27DG2naIh92yDVH";
 
