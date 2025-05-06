@@ -30,13 +30,29 @@ export default function CategoryPage() {
     if (!segmentId) return;
 
     // Henter arrangementer
-    fetch(`https://app.ticketmaster.com/discovery/v2/events?apikey=${API_KEY}&locale=*&size=5&segmentId=${segmentId}`)
+    fetch(`https://app.ticketmaster.com/discovery/v2/events?apikey=${API_KEY}&locale=*&size=5&segmentId=${segmentId}`) 
       .then(res => res.json())
       .then(data => {
         const eventData = data._embedded?.events || [];
-        setEvents(eventData);
+        // setter state med max 5 ulike arrangementer
+        setEvents(eventData.slice(0, 5)); 
 
-        
+
+        // Henter ut unike spillesteder fra eventene
+        const venueList = []; // Tom liste for å lagre venue objektene 
+        const venueIds = []; // Tom liste for å holde styr på ID'er
+
+        // Går igjennom alle eventene vi har hentet ut 
+        eventData.forEach(event => {
+          const venue = event._embedded?.venues?.[0]; // Henter første eventet
+          // Hvis venue finnes, og og ikke lagt til ID. 
+          if (venue && !venueIds.includes(venue.id)) {
+            venueList.push(venue); // Legger til venue i listen
+            venueIds.push(venue.id); // Registrerer ID-en 
+          }
+        });
+         // setter state med max 5 ulike spillesteder
+        setVenues(venueList.slice(0, 5)); 
       });
 
     // Henter attraksjoner
@@ -44,16 +60,10 @@ export default function CategoryPage() {
       .then(res => res.json())
       .then(data => {
         const attractionData = data._embedded?.attractions || [];
-        setAttractions(attractionData);
+        // setter state med max 5 ulike attraksjoner
+        setAttractions(attractionData.slice(0, 5)); 
       });
 
-    // Henter spillesteder
-    fetch(`https://app.ticketmaster.com/discovery/v2/venues?apikey=${API_KEY}&locale=*&size=5&segmentId=${segmentId}`)
-      .then(res => res.json())
-      .then(data => {
-        const venueData = data._embedded?.venues || [];
-        setVenues(venueData);
-      });
   }, [slug]);
 
   return ( // Skriver ut innhold på nettsiden. å returnere JSX som viser innhold.
@@ -89,9 +99,11 @@ export default function CategoryPage() {
         <h2>Spillesteder</h2>
         {venues.map(venue => (
           <article key={venue.id}>
-             <img src={venue.images?.[0]?.url} alt={venue.name}/>
             <h3>{venue.name}</h3>
             <p>{venue.city?.name}, {venue.country?.name}</p>
+            {venue.images?.[0]?.url && (
+              <img src={venue.images?.[0]?.url} alt={venue.name}/>
+            )}
           </article>
         ))}
       </section>
