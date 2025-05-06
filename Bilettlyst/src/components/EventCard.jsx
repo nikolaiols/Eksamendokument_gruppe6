@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import ArtistCard from "./ArtistCard";
 
 export default function (){
     const [Eventcard, setEventcard] = useState([]);
@@ -27,20 +28,12 @@ export default function (){
           <p>{ev._embedded?.venues?.[0]?.name}</p>
           {<p>{ev.dates?.start.localDate}</p>}
           <button>Kjøp</button>
-          <button>legg til i ønskeliste</button> {/*denne må funke*/}
+          <button>legg til i ønskeliste</button>
          </article>
       ))}
       </section>
-      
-      <section>
-      {/*denne skal endres.*/}
-      {Eventcard.map((ev) => (
-        <article key={ev.id}>
-          <h3>{ev._embedded?.attractions?.[1]?.name}</h3>
-          {<img src={ev._embedded.attractions[1].images[1].url} alt="f" />}
-         </article>
-      ))}
-      </section>
+
+      <ArtistCard/>
       </>
 
       //artister som er på festivalen bare bilde og navn
