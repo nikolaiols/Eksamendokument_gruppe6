@@ -9,7 +9,7 @@ export default function EventCard(){
     const getEventcard = async () => {
         fetch(`https://app.ticketmaster.com/discovery/v2/events?apikey=XiNPWWR7685AFoobg27DG2naIh92yDVH&keyword=${slug}&locale=*&countryCode=NO`) // Henter data fra API-et.
           .then((response) => response.json()) //gjør om til JSON-format
-          .then((data) => setEventcard(data._embedded?.events)) // Setter Findings i state-variabelen
+          .then((data) => setEventcard(data._embedded?.events)) // Setter eventcard i state-variabelen
           .catch((error) => console.error("Skjedde noe feil ved fetch", error)); //feilmeldinger
       };
 
