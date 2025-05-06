@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ArtistCard from "./ArtistCard";
 
-export default function (){
+export default function EventCard(){
     const [Eventcard, setEventcard] = useState([]);
     const { slug } = useParams(); // Får slug fra URL
 

@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import "../Styles/Home.scss"
 import { Link } from "react-router-dom";
-
 export default function Home(){
   //en funksjon som gjør det mulig å ta imot en tekslig verdi fra knappene og gjør den om til små bokstaver: (dette gjorde vi sammen på skolen, noen problemer med github så ble på min(Nikolai) sin pc)
   const handleClick = (e) => {
@@ -41,9 +40,10 @@ export default function Home(){
    //getCity()
    console.log("Festival:", Festival);
    console.log("city:", City);
+  
  }, []);
 
-    
+
     return(
         <>
         <h1>Sommerens festivaler!</h1>
