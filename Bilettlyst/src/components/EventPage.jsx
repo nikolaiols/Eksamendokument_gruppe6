@@ -35,7 +35,5 @@ export default function EventCard(){
 
       <ArtistCard/>
       </>
-
-      //artister som er på festivalen bare bilde og navn
     )
 }
