@@ -145,7 +145,7 @@ export default function CategoryPage() {
             )}
             {/* Knapp som sjekker og endrer favorittstatus */}
             <button className="heart-button" onClick={() => toggleFavorite(venue.id, "venue")}>
-              <FontAwesomeIcon icon={isFavorite(venue.id, "venue") ? solidHeart : regularHeart} /> {/* Knapp som sjekker og endrer favorittstatus */}
+              <FontAwesomeIcon icon={isFavorite(venue.id, "venue") ? solidHeart : regularHeart} /> 
             </button>
           </article>
         ))}
