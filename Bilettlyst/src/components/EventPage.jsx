@@ -22,6 +22,9 @@ export default function EventCard(){
       <>
       <section>
       <h2>Festivalpass:</h2>
+      <h2>sjanger: {Eventcard?.[0]?.classifications?.[0]?.genre?.name}</h2>
+      {/**Noe feil her, prøvd å mappe ut men får bare ut en sjanger. */}
+      
      {Eventcard.map((ev) => (
         <article key={ev.id}>
           {<img src={ev.images?.[0]?.url} alt={ev.name} />}
