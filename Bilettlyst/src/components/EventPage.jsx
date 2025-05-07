@@ -22,8 +22,13 @@ export default function EventCard(){
       <>
       <section>
       <h2>Festivalpass:</h2>
-      <h2>sjanger: {Eventcard?.[0]?.classifications?.[0]?.genre?.name}</h2>
-      {/**Noe feil her, prøvd å mappe ut men får bare ut en sjanger. */}
+      <h2>sjanger:</h2>
+      <ul>
+        {Eventcard.map((ev, index) => (
+          <li key={index}>{ev.classifications?.[0]?.subGenre?.name}</li>
+        ))}
+      </ul>
+      {/**Noe feil her tror jeg */}
       
      {Eventcard.map((ev) => (
         <article key={ev.id}>
