@@ -75,7 +75,11 @@ export default function Home(){
           <article key={city.id}>
             <img src={city.images?.[0]?.url} alt={city.name} />
             <h3>{city.name}</h3>
-            <button>Les mer om {city.name}</button>
+            <p>{city.dates?.start?.localDate}</p> 
+            <p>{city.dates?.start?.localTime}</p> 
+            <p>{city._embedded?.venues?.[0]?.country?.name}</p>
+            <p>{city._embedded?.venues?.[0]?.city?.name}</p> 
+            <p>{city._embedded?.venues?.[0]?.name}</p> 
           </article>
         ))}
 

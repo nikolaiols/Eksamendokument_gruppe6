@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import "../Styles/Home.scss"
 
 // Definerer Dashboard komponentet
 export default function Dashboard(){
@@ -7,6 +8,7 @@ export default function Dashboard(){
     // Oppretter en state-variabel, for å lagre brukernavnet
     const [username, setUsername] = useState('');
     // Funksjon som håndterer innsending av loggin-skjema
+
   const handleLogin = (e) => {
     setIsLoggedIn(true); // Setter brukeren til, innlogget
   };
