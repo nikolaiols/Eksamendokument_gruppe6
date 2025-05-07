@@ -21,7 +21,6 @@ export default function EventCard(){
     return(
       <>
       <section>
-      <h2>Festivalpass:</h2>
       <h2>sjanger:</h2>
       <ul>
         {Eventcard.map((ev, index) => (
@@ -29,6 +28,7 @@ export default function EventCard(){
         ))}
       </ul>
       {/**Noe feil her tror jeg */}
+      <h2>Festivalpass:</h2>
       
      {Eventcard.map((ev) => (
         <article key={ev.id}>
