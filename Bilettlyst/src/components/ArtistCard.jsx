@@ -10,7 +10,7 @@ export default function ArtistCard(){
     const getArtistCard = async () => {
         fetch(`https://app.ticketmaster.com/discovery/v2/events?apikey=XiNPWWR7685AFoobg27DG2naIh92yDVH&keyword=${slug}&locale=*&countryCode=NO`) // Henter data fra API-et.
           .then((response) => response.json()) //gjør om til JSON-format
-          .then((data) => setArtistCard(data._embedded?.events)) // Setter Findings i state-variabelen
+          .then((data) => setArtistCard(data._embedded?.events)) // Setter Artist i state-variabelen
           .catch((error) => console.error("Skjedde noe feil ved fetch", error)); //feilmeldinger
       };
 
@@ -26,6 +26,7 @@ export default function ArtistCard(){
        som sjekker om id-en til artisten allerede er brukt*/}
       {ArtistCard.map((ev) =>
         ev._embedded?.attractions?.map((artist) => {
+
           if (duplikatArtist.includes(artist.id)) {
             return null;
           }
