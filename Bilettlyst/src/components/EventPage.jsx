@@ -21,6 +21,7 @@ export default function EventCard(){
     return(
       <>
       <section>
+      <h2>Festivalpass:</h2>
      {Eventcard.map((ev) => (
         <article key={ev.id}>
           {<img src={ev.images?.[0]?.url} alt={ev.name} />}
