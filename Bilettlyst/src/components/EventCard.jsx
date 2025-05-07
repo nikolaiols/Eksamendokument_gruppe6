@@ -1,41 +1,44 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import ArtistCard from "./ArtistCard";
+import { Link } from "react-router-dom";
 
-export default function EventCard(){
-    const [Eventcard, setEventcard] = useState([]);
-    const { slug } = useParams(); // Får slug fra URL
+export default function EventPage(){
+    
+    //lager en slug, men siden NEON kortet skriver ut neon-festival istedenfor neon blir det feil i keyword. derfor gjør vi om neon-festival til neon før den sendes som slug.
+    const CreateSlug = (name) => {
+        if (name.toLowerCase().includes("neon")) return "neon";
+        return name.toLowerCase().replace(/\s+/g, "-");
+    };
+    
+    const [Festival, setFestival] = useState([]);
 
-    const getEventcard = async () => {
-        fetch(`https://app.ticketmaster.com/discovery/v2/events?apikey=XiNPWWR7685AFoobg27DG2naIh92yDVH&keyword=${slug}&locale=*&countryCode=NO`) // Henter data fra API-et.
-          .then((response) => response.json()) //gjør om til JSON-format
-          .then((data) => setEventcard(data._embedded?.events)) // Setter eventcard i state-variabelen
-          .catch((error) => console.error("Skjedde noe feil ved fetch", error)); //feilmeldinger
-      };
+    const getFestival = async () => {
+        fetch("https://app.ticketmaster.com/discovery/v2/attractions?apikey=XiNPWWR7685AFoobg27DG2naIh92yDVH&id=K8vZ917_YJf,%20K8vZ917oWOV,%20K8vZ917K7fV,%20K8vZ917bJC7&locale=*") // Henter data fra API-et.
+        .then((response) => response.json()) //gjør om til JSON-format
+        .then((data) => setFestival(data._embedded?.attractions || [])) // Setter Festival i state-variabelen
+        .catch((error) => console.error("Skjedde noe feil ved fetch", error)); //feilmeldinger
+    };
 
-      useEffect(() => {
-        getEventcard()
-        console.log("eventcard:", Eventcard);
-      }, []);
-
+    useEffect(() => {
+        getFestival()
+        //getCity()
+        console.log("Festival:", Festival);
+    }, []);
+    
+    
     return(
-      <>
-      <section>
-     {Eventcard.map((ev) => (
-        <article key={ev.id}>
-          {<img src={ev.images?.[0]?.url} alt={ev.name} />}
-         <h3>{ev.name}</h3>
-          <p>{ev._embedded?.venues?.[0]?.name}</p>
-          {<p>{ev.dates?.start.localDate}</p>}
-          <button>Kjøp</button>
-          <button>legg til i ønskeliste</button>
-         </article>
-      ))}
-      </section>
-
-      <ArtistCard/>
-      </>
-
-      //artister som er på festivalen bare bilde og navn
+        /*Bytte navn!*/
+        <section>
+        {Festival.map((fe) => {
+          {/*mapper ut en slug for hver av festivalene*/}
+          CreateSlug
+          return (
+            <article key={fe.id}>
+              <img src={fe.images?.[0]?.url} alt={fe.name} />
+              <h3>{fe.name}</h3>
+              <Link to={`/event/:${CreateSlug(fe.name)}`}>Les mer om {fe.name}</Link>
+            </article>
+          );
+        })}
+        </section>
     )
 }
