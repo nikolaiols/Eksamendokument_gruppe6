@@ -28,7 +28,7 @@ export default function EventCard(){
         ))}
       </ul>
   
-      <h2>Festivalpass:</h2>
+      <h2>Festivalpass {slug}</h2>
       
      {Eventcard.map((ev) => (
         <article key={ev.id}>

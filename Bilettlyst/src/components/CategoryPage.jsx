@@ -10,10 +10,25 @@ export default function CategoryPage() {
 //Henter ut sluggen "musikk", "sport" og "teater" fra URL-en
   const { slug } = useParams();
 
+  // tar imot input fra søk
+  const [Search, setSearch] = useState("");       
+  const [filteredTerm, setFilteredTerm] = useState(""); 
+
   // Oppretter states for arrangementer, attraksjoner og spillesteder
   const [events, setEvents] = useState([]);
   const [attractions, setAttractions] = useState([]);
   const [venues, setVenues] = useState([]);
+
+  
+  //tar imot tekstlig verdi
+  const handleSearchInput = (e) => {
+    setSearch(e.target.value.toLowerCase());
+  };
+  //starter search
+  const startSearch = () => {
+    setFilteredTerm(Search);
+  };
+  
 
   // Oppretter en state for "favoritter", hvor vi lagrer objekter med både id og type
   const [favorites, setFavorites] = useState([]);
@@ -98,7 +113,16 @@ export default function CategoryPage() {
 
   return (
     <>
-      {/* Seksjon for attraksjoner */}
+      <label> Søk etter arrangement  
+      <input
+      type="text"
+      placeholder="Søk etter arrangement..."
+      onChange={handleSearchInput}
+      value={Search}
+    />
+    <button onClick={startSearch}>Søk</button>
+    </label> 
+  {/* Seksjon for attraksjoner */}
       <section className="Attraksjoner">
         <h2>Attraksjoner</h2>
         {attractions.map(attr => (
@@ -116,7 +140,7 @@ export default function CategoryPage() {
       {/* Seksjon for arrangementer */}
       <section className="Arrangementer">
         <h2>Arrangementer</h2>
-        {events.map((event) => (
+        {events.filter(event => event.name.toLowerCase().includes(filteredTerm)).map((event) => (
           <article key={event.id}>
             <img src={event.images?.[0]?.url} alt={event.name} />
             <h3>{event.name}</h3>
