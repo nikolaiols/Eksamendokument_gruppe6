@@ -27,7 +27,7 @@ export default function EventCard(){
           <li key={index}>{ev.classifications?.[0]?.subGenre?.name}</li>
         ))}
       </ul>
-      {/**Noe feil her tror jeg */}
+  
       <h2>Festivalpass:</h2>
       
      {Eventcard.map((ev) => (
