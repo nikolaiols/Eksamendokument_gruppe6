@@ -15,7 +15,6 @@ section {
     width: 300px;
     border: 1px solid #efefef;
     border-radius: 8px;
-    box-shadow: none;
     padding: 1rem;
     text-align: center;
   
@@ -47,7 +46,9 @@ section {
       list-style: none;
   }
   .artist{
+    margin-top: 2rem;
     width: 100%;
+    font-size: 2rem;
   }
 
 .Byer{
