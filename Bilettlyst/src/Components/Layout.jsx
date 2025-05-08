@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import "../Styles/Home.scss"
 import "../Styles/Layout.scss"
 export default function Layout({children}){
     return(

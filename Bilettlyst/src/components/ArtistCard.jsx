@@ -21,7 +21,7 @@ export default function ArtistCard(){
 
     return(
       <section>
-      <h3>Artister</h3>
+      <h3 className="artist">Artister</h3>
       {/*Siden det er flere versjoner av konsertene vil artistene printes ut flere ganger. Dette ble ungått ved å lage en if-test
        som sjekker om id-en til artisten allerede er brukt*/}
       {ArtistCard.map((ev) =>

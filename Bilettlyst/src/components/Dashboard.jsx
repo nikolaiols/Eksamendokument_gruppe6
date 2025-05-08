@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import "../Styles/Home.scss"
 
 // Definerer Dashboard komponentet
 export default function Dashboard(){

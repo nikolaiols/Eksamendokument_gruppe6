@@ -26,7 +26,6 @@ export default function EventPage(){
     
     
     return(
-        /*Bytte navn!*/
         <section>
         {Festival.map((fe) => {
           {/*mapper ut en slug for hver av festivalene*/}

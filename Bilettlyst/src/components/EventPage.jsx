@@ -21,7 +21,7 @@ export default function EventCard(){
     return(
       <>
       <section>
-      <h2>sjanger:</h2>
+      <h3>sjanger:</h3>
       <ul>
         {Eventcard.map((ev, index) => (
           <li key={index}>{ev.classifications?.[0]?.subGenre?.name}</li>

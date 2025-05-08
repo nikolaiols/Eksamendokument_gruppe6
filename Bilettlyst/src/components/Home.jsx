@@ -1,5 +1,5 @@
 import {useState } from "react";
-import "../Styles/Home.scss"
+import "../Styles/ArtikkelKort.scss"
 import EventPage from "./EventCard";
 export default function Home(){
   //en funksjon som gjør det mulig å ta imot en tekslig verdi fra knappene og gjør den om til små bokstaver: (dette gjorde vi sammen på skolen, noen problemer med github så ble på min(Nikolai) sin pc)

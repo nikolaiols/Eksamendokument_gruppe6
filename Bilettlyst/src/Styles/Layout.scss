@@ -19,14 +19,6 @@ header {
         li {
         display: flex;
 
-        &.Logo {
-            margin-right: auto;
-        }
-
-        &.Login {
-            margin-left: auto;
-        }
-
         button {
             background: none;
             border: none;
@@ -40,4 +32,12 @@ header {
         }
     }
     }
+}
+
+.Logo {
+    margin-right: auto;
+}
+
+.Login {
+    margin-left: auto;
 }
