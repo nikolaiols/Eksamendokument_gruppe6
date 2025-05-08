@@ -19,7 +19,7 @@ export default function CategoryPage() {
   const [attractions, setAttractions] = useState([]);
   const [venues, setVenues] = useState([]);
 
-  
+
   //tar imot tekstlig verdi
   const handleSearchInput = (e) => {
     setSearch(e.target.value.toLowerCase());
