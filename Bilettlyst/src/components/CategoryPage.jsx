@@ -7,7 +7,7 @@ import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
 
 // Hoved komponentet for kategori siden
 export default function CategoryPage() {
-//Henter ut sluggen "musikk", "sport" og "teater" fra URL-en
+  //Henter ut sluggen "musikk", "sport" og "teater" fra URL-en
   const { slug } = useParams();
 
   // tar imot input fra søk
@@ -16,9 +16,14 @@ export default function CategoryPage() {
 
   // Oppretter states for arrangementer, attraksjoner og spillesteder
   const [events, setEvents] = useState([]);
+  const [allEvents, setAllEvents] = useState([]); // Lager kopi for filtrering senere
   const [attractions, setAttractions] = useState([]);
   const [venues, setVenues] = useState([]);
 
+  // Oppretter states for filtrering
+  const [selectedCountry, setSelectedCountry] = useState("");
+  const [selectedCity, setSelectedCity] = useState("");
+  const [selectedDate, setSelectedDate] = useState("");
 
   //tar imot tekstlig verdi
   const handleSearchInput = (e) => {
@@ -51,13 +56,15 @@ export default function CategoryPage() {
   useEffect(() => {
     if (!segmentId) return;
 
-    // Henter arrangementer
-    fetch(`https://app.ticketmaster.com/discovery/v2/events?apikey=${API_KEY}&locale=*&size=5&segmentId=${segmentId}`)
+    const eventUrl = `https://app.ticketmaster.com/discovery/v2/events.json?apikey=${API_KEY}&locale=*&size=100&segmentId=${segmentId}`;
+
+    // Henter alle events for valgt segment ID
+    fetch(eventUrl)
       .then(res => res.json())
       .then(data => {
-        const eventData = data._embedded?.events || [];
+        const eventSave = data._embedded?.events || [];
         // setter state med max 5 ulike arrangementer
-        setEvents(eventData.slice(0, 5)); 
+        setEvents(eventSave.slice(0, 5)); 
 
 
         // Henter ut unike spillesteder fra eventene
@@ -65,7 +72,7 @@ export default function CategoryPage() {
         const venueIds = []; // Tom liste for å holde styr på ID'er
 
         // Går igjennom alle eventene vi har hentet ut 
-        eventData.forEach(event => {
+        eventSave.forEach(event => {
           const venue = event._embedded?.venues?.[0]; // Henter første eventet
           // Hvis venue finnes, og og ikke lagt til ID. 
           if (venue && !venueIds.includes(venue.id)) {
@@ -74,25 +81,73 @@ export default function CategoryPage() {
           }
         });
          // setter state med max 5 ulike spillesteder
-        setVenues(venueList.slice(0, 5)); 
-      });
+        setVenues(venueList.slice(0, 5));
 
-    // Henter attraksjoner
-    fetch(`https://app.ticketmaster.com/discovery/v2/attractions?apikey=${API_KEY}&locale=*&size=5&segmentId=${segmentId}`)
+        // Henter ut attraksjoner direkte fra eventene (Ettersom attractions ikke har steds informasjon)
+        const attractionMap = {};
+        eventSave.forEach(event => {
+          const attr = event._embedded?.attractions?.[0];
+          if (attr && !attractionMap[attr.id]) {
+            attractionMap[attr.id] = attr;
+          }
+        });
+
+        setAttractions(Object.values(attractionMap).slice(0, 5)); //Viser de første 5 attraksjonenen
+      });
+  }, [slug]);
+
+  // Håndterer filtrering av data når man trykker på knapp
+  const handleFilter = () => {
+    if (!segmentId) return;
+
+    // Bygger URL basert på brukervalg
+    const eventUrl = `https://app.ticketmaster.com/discovery/v2/events.json?apikey=${API_KEY}&locale=*&size=100&segmentId=${segmentId}` +
+      (selectedCountry ? `&countryCode=${selectedCountry}` : "") +
+      (selectedCity ? `&city=${selectedCity}` : "") +
+      (selectedDate ? `&startDateTime=${selectedDate}T00:00:00Z` : "");
+
+    // Henter events som matcher valgt land, by og dato
+    fetch(eventUrl)
       .then(res => res.json())
       .then(data => {
-        const attractionData = data._embedded?.attractions || [];
-        // setter state med max 5 ulike attraksjoner
-        setAttractions(attractionData.slice(0, 5)); 
-      });
+        const filteredEvents = data._embedded?.events || [];
+        setEvents(filteredEvents.slice(0, 5));
 
-  }, [slug]);
+        const venueList = [];
+        const venueIds = [];
+
+        filteredEvents.forEach(event => {
+          const venue = event._embedded?.venues?.[0];
+          if (venue && !venueIds.includes(venue.id)) {
+            venueList.push(venue);
+            venueIds.push(venue.id);
+          }
+        });
+        setVenues(venueList.slice(0, 5));
+        
+        // Henter attraksjoner som er knyttet til de filtrerte arrangementene 
+        // Vi kan ikke filtrere firekte på attraksjoner, så vi henter de via arrangementene 
+        const attractionMap = {};
+        filteredEvents.forEach(event => {
+          const attr = event._embedded?.attractions?.[0];
+          if (
+            attr &&
+            attr.name?.toLowerCase().includes(Search) &&
+            !attractionMap[attr.id]
+          ) {
+            attractionMap[attr.id] = attr;
+          }
+        });
+
+        setAttractions(Object.values(attractionMap).slice(0, 5)); // Viser de første 5
+      });
+  };
 
   // Funksjon for å legge til eller fjerne fra favoritter,vi lagrer både ID og type
   // Den tar imot to parametere: id (unik identifikator) og type (event, venue, attraction)
   const toggleFavorite = (id, type) => {
     setFavorites((prev) => {
-  // Skjekker om elementet allerede finnes i favoritt-listen, basert på både ID og type
+      // Skjekker om elementet allerede finnes i favoritt-listen, basert på både ID og type
       const isAlreadyFavorited = prev.some(fav => fav.id === id && fav.type === type);
 
       if (!isAlreadyFavorited) {
@@ -114,15 +169,44 @@ export default function CategoryPage() {
   return (
     <>
       <label> Søk etter arrangement  
-      <input
-      type="text"
-      placeholder="Søk etter arrangement..."
-      onChange={handleSearchInput}
-      value={Search}
-    />
-    <button onClick={startSearch}>Søk</button>
-    </label> 
-  {/* Seksjon for attraksjoner */}
+        <input
+          type="text"
+          placeholder="Søk etter arrangement..."
+          onChange={handleSearchInput}
+          value={Search}
+        />
+        <button onClick={startSearch}>Søk</button>
+      </label> 
+
+      <label>Velg land:
+        <select onChange={(e) => setSelectedCountry(e.target.value)} value={selectedCountry}>
+          <option value="">Alle</option>
+          <option value="NO">Norge</option>
+          <option value="SE">Sverige</option>
+          <option value="GB">UK</option>
+        </select>
+      </label>
+
+      <label>Velg by:
+        <select onChange={(e) => setSelectedCity(e.target.value)} value={selectedCity}>
+          <option value="">Alle</option>
+          <option value="Oslo">Oslo</option>
+          <option value="Stockholm">Stockholm</option>
+          <option value="London">London</option>
+        </select>
+      </label>
+
+      <label>Velg dato:
+        <input
+          type="date"
+          value={selectedDate}
+          onChange={(e) => setSelectedDate(e.target.value)}
+        />
+      </label>
+
+      <button onClick={handleFilter}>Filtrer</button>
+
+      {/* Seksjon for attraksjoner */}
       <section className="Attraksjoner">
         <h2>Attraksjoner</h2>
         {attractions.map(attr => (
