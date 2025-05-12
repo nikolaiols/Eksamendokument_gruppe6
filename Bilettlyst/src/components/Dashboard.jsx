@@ -9,7 +9,9 @@ export default function Dashboard(){
     // Funksjon som håndterer innsending av loggin-skjema
 
   const handleLogin = (e) => {
+    e.preventDefault(); // Forhindrer at skjemaet prøver å sende
     setIsLoggedIn(true); // Setter brukeren til, innlogget
+
   };
 
     return(
