@@ -20,7 +20,6 @@ export default function EventPage(){
 
     useEffect(() => {
         getFestival()
-        //getCity()
         console.log("Festival:", Festival);
     }, []);
     

@@ -27,7 +27,6 @@ export default function Home(){
 
     return(
         <>
-        {/**fjern */}
         <h1>Sommerens festivaler!</h1>
         <EventPage/>
         {/*her er det lagd knapper som sender inn den tekstlige verdien fra knappen og sender denne inn i url slik at man får riktig arrangementer basert på by */}

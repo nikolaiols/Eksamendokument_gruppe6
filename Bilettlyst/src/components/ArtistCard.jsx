@@ -23,7 +23,7 @@ export default function ArtistCard(){
       <section>
       <h3 className="artist">Artister</h3>
       {/*Siden det er flere versjoner av konsertene vil artistene printes ut flere ganger. Dette ble ungått ved å lage en if-test
-       som sjekker om id-en til artisten allerede er brukt*/}
+       som sjekker om id-en til artisten allerede er brukt. etter det printes kortene ut med navn og bilde*/}
       {ArtistCard.map((ev) =>
         ev._embedded?.attractions?.map((artist) => {
 

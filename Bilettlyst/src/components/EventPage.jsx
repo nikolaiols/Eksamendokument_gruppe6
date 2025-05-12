@@ -13,6 +13,7 @@ export default function EventCard(){
           .catch((error) => console.error("Skjedde noe feil ved fetch", error)); //feilmeldinger
       };
 
+      //starter get eventcard ved oppstart
       useEffect(() => {
         getEventcard()
         console.log("eventcard:", Eventcard);
@@ -23,6 +24,7 @@ export default function EventCard(){
       <section>
       <h3>sjanger:</h3>
       <ul>
+        {/*mapper ut sjanger, eller i dette tilfellet subsjanger da dette så mer riktig ut iforhold til musikken som spilles */}
         {Eventcard.map((ev, index) => (
           <li key={index}>{ev.classifications?.[0]?.subGenre?.name}</li>
         ))}
@@ -30,6 +32,7 @@ export default function EventCard(){
   
       <h2>Festivalpass {slug}</h2>
       
+      {/*mapper ut artikkelkort for hvert event */}
      {Eventcard.map((ev) => (
         <article key={ev.id}>
           {<img src={ev.images?.[0]?.url} alt={ev.name} />}
