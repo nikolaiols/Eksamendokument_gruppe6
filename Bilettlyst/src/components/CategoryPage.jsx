@@ -16,7 +16,6 @@ export default function CategoryPage() {
 
   // Oppretter states for arrangementer, attraksjoner og spillesteder
   const [events, setEvents] = useState([]);
-  const [allEvents, setAllEvents] = useState([]); // Lager kopi for filtrering senere
   const [attractions, setAttractions] = useState([]);
   const [venues, setVenues] = useState([]);
 
