@@ -18,7 +18,7 @@ export default function Layout({children}){
        {children}
        </main>
        <footer>
-        Footer!
+        <p>Ticketmaster API: <Link href="https://developer.ticketmaster.com/explore/" target="blank">"https://developer.ticketmaster.com/explore/"</Link></p>
        </footer>
        </>
     )
