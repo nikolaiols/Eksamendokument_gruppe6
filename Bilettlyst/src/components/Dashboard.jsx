@@ -15,7 +15,7 @@ export default function Dashboard(){
   };
 
     return(
-        <section>
+        <section className='form'>
       {!isLoggedIn ? (
         <>
           <h2>Logg inn</h2>

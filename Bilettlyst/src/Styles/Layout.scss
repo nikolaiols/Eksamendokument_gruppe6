@@ -41,3 +41,12 @@ header {
 .Login {
     margin-left: auto;
 }
+
+.form{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    input{
+        padding: .5rem;
+    }
+}
