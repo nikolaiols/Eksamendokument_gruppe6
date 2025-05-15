@@ -91,7 +91,10 @@ export default function CategoryPage() {
           }
         });
 
-        setAttractions(Object.values(attractionMap).slice(0, 5)); //Viser de første 5 attraksjonenen
+        // SetAttractions oppdaterer komponentenes state 'Attractions', som en array av attraksjonsobjekter
+
+        // Object.values(attractionMap) henter ut "Alle verdiene" fra objektet attractionMap, Object.value returenerer dermed en array med attraksjonsobjekter
+        setAttractions(Object.values(attractionMap).slice(0, 5)); //.slice(0,5) Viser de første attraksjonene 5 i arrayen
       });
   }, [slug]);
 
@@ -100,10 +103,10 @@ export default function CategoryPage() {
     if (!segmentId) return;
 
     // Bygger URL basert på brukervalg
-    const eventUrl = `https://app.ticketmaster.com/discovery/v2/events.json?apikey=${API_KEY}&locale=*&size=100&segmentId=${segmentId}` +
-      (selectedCountry ? `&countryCode=${selectedCountry}` : "") +
-      (selectedCity ? `&city=${selectedCity}` : "") +
-      (selectedDate ? `&startDateTime=${selectedDate}T00:00:00Z` : "");
+    const eventUrl = `https://app.ticketmaster.com/discovery/v2/events.json?apikey=${API_KEY}&locale=*&size=100&segmentId=${segmentId}` + //Basis URL for å hente events fra Ticketmaster APIet, med våresd APIKEY og valgt segmentID (Kategori)
+      (selectedCountry ? `&countryCode=${selectedCountry}` : "") + // Hvis bruker velger land, legger man til URL som countryCode (CountryCode=NO)
+      (selectedCity ? `&city=${selectedCity}` : "") + //Bruker velger en by legg til i ciry-filter i URL, (City= Oslo)
+      (selectedDate ? `&startDateTime=${selectedDate}T00:00:00Z` : ""); // Hvis det er valgt dato, legg til i startDateTime for å finne riktig arrangemeter til riktig tid
 
     // Henter events som matcher valgt land, by og dato
     fetch(eventUrl)
@@ -137,8 +140,9 @@ export default function CategoryPage() {
             attractionMap[attr.id] = attr;
           }
         });
-
-        setAttractions(Object.values(attractionMap).slice(0, 5)); // Viser de første 5
+        // SetAttractions oppdaterer komponentenes state 'Attractions', som en array av attraksjonsobjekter
+        // Object.values(attractionMap) henter ut "Alle verdiene" fra objektet attractionMap, Object.value returenerer dermed en array med attraksjonsobjekter
+        setAttractions(Object.values(attractionMap).slice(0, 5)); // .slice(0,5) Viser de første attraksjonene 5 i arrayen
       });
   };
 
@@ -167,7 +171,7 @@ export default function CategoryPage() {
 
   return (
     <>
-      <label> Søk etter arrangement  
+      <label className="Sokefelt"> Søk etter arrangement  
         <input
           type="text"
           placeholder="Søk etter arrangement..."
@@ -176,7 +180,7 @@ export default function CategoryPage() {
         />
         <button onClick={startSearch}>Søk</button>
       </label> 
-
+      <section className="Filtrering">
       <label>Velg land:
         <select onChange={(e) => setSelectedCountry(e.target.value)} value={selectedCountry}>
           <option value="">Alle</option>
@@ -204,6 +208,7 @@ export default function CategoryPage() {
       </label>
 
       <button onClick={handleFilter}>Filtrer</button>
+      </section>
 
       {/* Seksjon for attraksjoner */}
       <section className="Attraksjoner">
